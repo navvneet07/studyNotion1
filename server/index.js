@@ -1,29 +1,27 @@
-const express = require("express");
+import express, { json } from "express";
 
 
 const app = express();
 
-const userRoutes = require("./routes/User");
-const paymentRoutes = require("./routes/Payments");
-const profileRoutes = require("./routes/Profile");
-const CourseRoutes = require("./routes/Course");
+import userRoutes from "./routes/User";
+import paymentRoutes from "./routes/Payments";
+import profileRoutes from "./routes/Profile";
+import CourseRoutes from "./routes/Course";
 
-const database = require("./config/database");
-const cookieParser = require("cookie-parser");
+import { connect } from "./config/database";
+import cookieParser from "cookie-parser";
 
-const bodyParser= require("body-parser");
-const cors = require("cors");
-const fileUpload = require("express-fileupload");
-const { cloudnairyconnect } = require("./config/cloudinary");
+import cors from "cors";
+import fileUpload from "express-fileupload";
+import { cloudnairyconnect } from "./config/cloudinary";
 
-const dotenv = require("dotenv");
-dotenv.config();
+import { config } from "dotenv";
+config();
 
 const PORT = process.env.PORT || 4000;
-database.connect();
+connect();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(json());
 app.use(cookieParser());
 
 app.use(
