@@ -11,7 +11,7 @@ const CourseRoutes = require("./routes/Course");
 const database = require("./config/database");
 const cookieParser = require("cookie-parser");
 
-const bodyParser= require("body-parser")
+const bodyParser= require("body-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const { cloudnairyconnect } = require("./config/cloudinary");
@@ -27,7 +27,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: JSON.parse(process.env.CORS_ORIGIN),
+    origin: ["https://study-notion1-frontend.vercel.app"],
     credentials: true,
     maxAge: 14400,
   })
