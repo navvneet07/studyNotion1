@@ -1,32 +1,31 @@
-import express, { json } from "express";
-
+const express = require("express");
 
 const app = express();
 
-import userRoutes from "./routes/User";
-import paymentRoutes from "./routes/Payments";
-import profileRoutes from "./routes/Profile";
-import CourseRoutes from "./routes/Course";
+const userRoutes = require("./routes/User");
+const paymentRoutes = require("./routes/Payments");
+const profileRoutes = require("./routes/Profile");
+const CourseRoutes = require("./routes/Course");
 
-import { connect } from "./config/database";
-import cookieParser from "cookie-parser";
+const database = require("./config/database");
+const cookieParser = require("cookie-parser");
 
-import cors from "cors";
-import fileUpload from "express-fileupload";
-import { cloudnairyconnect } from "./config/cloudinary";
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
+const { cloudnairyconnect } = require("./config/cloudinary");
 
-import { config } from "dotenv";
-config();
+const dotenv = require("dotenv");
+dotenv.config();
 
-const PORT = process.env.PORT || 4000;
-connect();
+const PORT = process.env.PORT || 5000;
+database.connect();
 
-app.use(json());
+app.use(express.json());
 app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["https://study-notion1-frontend.vercel.app"],
+    origin: JSON.parse(process.env.CORS_ORIGIN),
     credentials: true,
     maxAge: 14400,
   })
